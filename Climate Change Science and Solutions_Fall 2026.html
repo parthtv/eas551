@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Climate Change Science and Solutions — Fall 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Source+Sans+3:wght@300;400;500;600&amp;family=Source+Code+Pro:wght@400&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink: #2b3b35;
+    --sage: #8AA29A;
+    --sage-dark: #5f776e;
+    --sage-light: #eef2f0;
+    --gold: #E0A73E;
+    --red: #9A3324;
+    --text: #2c2c2c;
+    --muted: #6b7280;
+    --border: #e2e8f0;
+    --sidebar-width: 250px;
+    --bg: #f9f8f5;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* SIDEBAR */
+  #sidebar {
+    width: var(--sidebar-width);
+    flex-shrink: 0;
+    background: var(--ink);
+    position: fixed;
+    top: 0; left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.15) transparent;
+  }
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+
+  .sidebar-header {
+    padding: 32px 20px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .sidebar-name {
+    font-family: 'Playfair Display', serif;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .sidebar-title {
+    color: rgba(255,255,255,0.5);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  nav ul { list-style: none; padding: 16px 0; flex: 1; }
+  nav ul li a {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 20px;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    font-size: 12.5px;
+    font-weight: 500;
+    transition: all 0.18s ease;
+    border-left: 3px solid transparent;
+  }
+  nav ul li a:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.06);
+    border-left-color: var(--sage);
+  }
+  nav ul li a.active {
+    color: #fff;
+    background: rgba(138,162,154,0.22);
+    border-left-color: var(--sage);
+  }
+  nav ul li a .nav-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    flex-shrink: 0; transition: background 0.18s;
+  }
+  nav ul li a.active .nav-dot,
+  nav ul li a:hover .nav-dot { background: var(--sage); }
+
+  /* MAIN */
+  #main {
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    max-width: 880px;
+    padding: 0 52px 80px;
+  }
+
+  /* HERO */
+  #hero {
+    padding: 60px 0 40px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+  .hero-title {
+    font-size: 16px;
+    color: var(--sage-dark);
+    font-weight: 600;
+    margin: 10px 0 4px;
+  }
+  .hero-affil { font-size: 14px; color: var(--muted); }
+  .hero-contact { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 16px; }
+  .hero-contact a, .hero-contact span {
+    color: var(--sage-dark);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .hero-contact a:hover { color: var(--ink); }
+
+  /* SECTIONS */
+  .section { padding: 52px 0 0; }
+  .section + .section { border-top: 1px solid var(--border); margin-top: 4px; }
+  .section-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-heading::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .section p { margin-bottom: 14px; }
+  .section a { color: var(--sage-dark); text-decoration: none; }
+  .section a:hover { text-decoration: underline; }
+  strong { font-weight: 600; color: var(--ink); }
+  em { color: var(--muted); }
+
+  /* OBJECTIVES / bullet lists */
+  ul.plain { list-style: none; padding: 0; }
+  ul.plain li {
+    position: relative;
+    padding: 4px 0 4px 20px;
+    font-size: 14.5px;
+  }
+  ul.plain li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 12px;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--sage);
+  }
+
+  /* GRADING cards */
+  .grade-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 22px; }
+  .grade-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--sage);
+    border-radius: 6px;
+    padding: 16px 18px;
+  }
+  .grade-pct {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--sage-dark);
+  }
+  .grade-label { font-weight: 600; color: var(--ink); font-size: 14px; margin-top: 2px; }
+
+  .callout {
+    background: var(--sage-light);
+    border-left: 4px solid var(--sage);
+    padding: 12px 16px;
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+
+  /* SCHEDULE TABLE */
+  .schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .schedule-table thead th {
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #fff;
+    background: var(--ink);
+    padding: 10px 12px;
+    font-weight: 600;
+  }
+  .schedule-table tbody td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .schedule-table tbody tr:hover { background: var(--sage-light); }
+  .sch-num {
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 700;
+    color: var(--sage-dark);
+    width: 52px;
+  }
+  .sch-date { white-space: nowrap; font-weight: 600; color: var(--ink); width: 78px; }
+  .sch-day { color: var(--muted); width: 54px; }
+  .sch-topic { color: var(--text); }
+  .sch-topic a { color: inherit; text-decoration: none; }
+  .sch-topic a:hover { color: var(--sage-dark); text-decoration: underline; }
+  .class-card { scroll-margin-top: 20px; }
+  tr.holiday-row td { background: #faf6ee; color: var(--red); font-style: italic; }
+  tr.holiday-row:hover td { background: #f6efe0; }
+  tr.holiday-row .sch-num { color: var(--red); }
+  tr.holiday-row .sch-date { color: var(--red); }
+
+  /* CLASS CARDS (readings) */
+  .class-card {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .class-card:last-child { border-bottom: none; }
+  .class-head { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+  .class-badge {
+    display: inline-block;
+    background: var(--sage);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-family: 'Source Code Pro', monospace;
+  }
+  .class-date { color: var(--red); font-weight: 700; font-size: 13px; }
+  .class-topic {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .reading-list { list-style: none; padding: 0; }
+  .reading-list li {
+    position: relative;
+    padding: 4px 0 4px 20px;
+    font-size: 13.8px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .reading-list li::before {
+    content: '';
+    position: absolute;
+    left: 2px; top: 12px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    border: 1.5px solid var(--sage);
+  }
+  .pub-journal { font-style: italic; color: var(--muted); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    :root { --sidebar-width: 0px; }
+    #sidebar { width: 260px; transform: translateX(-260px); transition: transform 0.3s ease; }
+    #sidebar.open { transform: translateX(0); }
+    #main { margin-left: 0; padding: 0 20px 60px; }
+    .schedule-table { font-size: 13px; }
+    .schedule-table tbody td, .schedule-table thead th { padding: 7px 8px; }
+  }
+  #menu-btn {
+    display: none;
+    position: fixed;
+    top: 16px; left: 16px;
+    z-index: 200;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  @media (max-width: 768px) { #menu-btn { display: flex; } }
+</style>
+</head>
+<body>
+<button id="menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+<aside id="sidebar">
+<div class="sidebar-header">
+<div class="sidebar-name">Climate Change Science &amp; Solutions</div>
+<div class="sidebar-title">Fall 2026 · U-M SEAS</div>
+</div>
+<nav>
+<ul>
+<li><a href="#overview"><span class="nav-dot"></span>Overview</a></li>
+<li><a href="#objectives"><span class="nav-dot"></span>Learning Objectives</a></li>
+<li><a href="#grading"><span class="nav-dot"></span>Grading</a></li>
+<li><a href="#readings"><span class="nav-dot"></span>Readings</a></li>
+<li><a href="#schedule"><span class="nav-dot"></span>Schedule</a></li>
+<li><a href="#outline"><span class="nav-dot"></span>Class-by-Class Outline</a></li>
+<li><a href="#policies"><span class="nav-dot"></span>Policies &amp; Resources</a></li>
+</ul>
+</nav>
+</aside>
+<main id="main">
+
+<section id="hero">
+<div class="hero-name">Climate Change Science and Solutions</div>
+<div class="hero-title">Fall 2026</div>
+<div class="hero-affil">School for Environment and Sustainability, University of Michigan · Mondays &amp; Wednesdays</div>
+<div class="hero-contact">
+<span>Instructor: <a href="https://parthtv.github.io" target="_blank" rel="noopener">Parth Vaishnav</a></span>
+<a href="mailto:parthtv@umich.edu">parthtv@umich.edu</a>
+</div>
+</section>
+
+<section class="section" id="overview">
+<h2 class="section-heading">Overview</h2>
+<p>This course consists of four parts. The first part will provide a primer for those who are curious about the physical mechanisms by which climate is determined, and by which climate change occurs. The treatment of these mechanisms will not be overly quantitative, and no prior knowledge of meteorology or atmospheric science is assumed. The second part will describe the projected consequences of climate change, and those that are already occurring; it will also familiarize students with how societies might adapt to these changes. The third part will explore (and critique) some of the tools that decision-makers use to quantify and compare the damages caused by these consequences. The final part of the course will discuss some of the technologies that could be deployed to stave off dangerous climate change.</p>
+</section>
+
+<section class="section" id="objectives">
+<h2 class="section-heading">Learning Objectives</h2>
+<ul class="plain">
+<li>Accurately describe the conclusions (and limitations) of literature on the causes and consequences of climate change, and know where to seek more detailed information.</li>
+<li>Run simple climate models and offer high-level explanations of the relationship between their inputs and outputs.</li>
+<li>Describe the consequences of climate change and different approaches to mitigating it.</li>
+<li>Describe and apply the methods used to quantify the damages caused by climate change and the costs of mitigation, and demonstrate an awareness of the limitations of such methods.</li>
+</ul>
+</section>
+
+<section class="section" id="grading">
+<h2 class="section-heading">Grading</h2>
+<p>There will be <strong>no final exam</strong>.</p>
+<div class="grade-grid">
+<div class="grade-card"><div class="grade-pct">55%</div><div class="grade-label">Quizzes</div></div>
+<div class="grade-card"><div class="grade-pct">20%</div><div class="grade-label">Mid-term</div></div>
+<div class="grade-card"><div class="grade-pct">25%</div><div class="grade-label">Class presentations</div></div>
+</div>
+<p><strong>Quizzes (55%):</strong> There will be a quiz on each Monday; there will be 12 quizzes and the lowest score will be dropped. Each quiz counts for 5% of the grade. Quizzes are in-class, on paper, and timed (15&#8211;20 mins). You can use written or printed notes but must close your computers. Any mathematical formulae or values of constants will be provided in the questions. You are free to use calculators.</p>
+<p><strong>Mid-term (20%):</strong> Based on the climate science component of the class. It will take place on <strong>October 28</strong>. The mid-term is in-class, on paper, and timed. Notes permitted, computers closed, calculators allowed.</p>
+<p><strong>Class presentations (25%):</strong> Please form teams of two before <strong>September 30</strong> and update <a href="https://docs.google.com/spreadsheets/d/1K77aGwhP_dN0eRNfVOrzmDPWXyM_Lj9d2ZLiCOhvMkk/edit?usp=sharing" target="_blank" rel="noopener">this spreadsheet</a>, picking a presentation slot (log in with your U-M Google account). Pick a topic based on the syllabus. Before <strong>October 28</strong>, upload a 200-word abstract of your proposed presentation (5% of the total course grade); you will receive feedback on this proposal.</p>
+<div class="callout"><strong>A few ground rules.</strong> For regrades, email a request explaining your reasons within a week of receiving the grade for <em>that</em> assignment. For presentations you work in pairs and may split the work as you see fit; by default both members receive the same grade (raise concerns with the instructor or GSI <em>before</em> the presentation). If you use AI for anything, say so and describe in a sentence or two how; learn its <a href="https://podcasts.apple.com/us/podcast/the-ezra-klein-show/id1548604447?i=1000592835492" target="_blank" rel="noopener">limitations</a> (e.g., it cannot distinguish truth from falsehood). You are responsible for any errors AI introduces and will be graded accordingly.</div>
+</section>
+
+<section class="section" id="readings">
+<h2 class="section-heading">Readings</h2>
+<p>The key textbook, freely available in electronic form from the U-M library, is:</p>
+<div class="callout">Dessler, Andrew. <em>Introduction to Modern Climate Change.</em> 3rd edition. New York, NY: Cambridge University Press, 2021.</div>
+<p>Access it by going to the <a href="https://www.lib.umich.edu" target="_blank" rel="noopener">University of Michigan Library</a> and searching for “Introduction to Modern Climate Change.” Let me know if you have trouble accessing it.</p>
+</section>
+
+<section class="section" id="schedule">
+<h2 class="section-heading">Schedule</h2>
+<p>The schedule follows the University of Michigan Fall 2026 academic calendar. There are no classes on <strong>Labor Day (Sep 7)</strong>, during the <strong>Fall Study Break (Oct 19)</strong>, or over the <strong>Thanksgiving recess (Nov 25)</strong>.</p>
+<table class="schedule-table">
+<thead><tr><th>Class</th><th>Date</th><th>Day</th><th>Topic</th></tr></thead>
+<tbody>
+<tr><td class="sch-num">0</td><td class="sch-date">31-Aug</td><td class="sch-day">Mon</td><td class="sch-topic">Introductions</td></tr>
+<tr><td class="sch-num">1</td><td class="sch-date">2-Sep</td><td class="sch-day">Wed</td><td class="sch-topic"><a href="#class-1">Evidence for Climate Change</a></td></tr>
+<tr class="holiday-row"><td class="sch-num">—</td><td class="sch-date">7-Sep</td><td class="sch-day">Mon</td><td class="sch-topic">Labor Day (no class)</td></tr>
+<tr><td class="sch-num">2</td><td class="sch-date">9-Sep</td><td class="sch-day">Wed</td><td class="sch-topic"><a href="#class-2">Earth’s Energy Balance</a></td></tr>
+<tr><td class="sch-num">3</td><td class="sch-date">14-Sep</td><td class="sch-day">Mon</td><td class="sch-topic"><a href="#class-3">Atmospheric Circulation</a></td></tr>
+<tr><td class="sch-num">4</td><td class="sch-date">16-Sep</td><td class="sch-day">Wed</td><td class="sch-topic"><a href="#class-4">Ocean Circulation</a></td></tr>
+<tr><td class="sch-num">5</td><td class="sch-date">21-Sep</td><td class="sch-day">Mon</td><td class="sch-topic"><a href="#class-5">The Carbon Cycle</a></td></tr>
+<tr><td class="sch-num">6</td><td class="sch-date">23-Sep</td><td class="sch-day">Wed</td><td class="sch-topic"><a href="#class-6">Sensitivity and Feedbacks</a></td></tr>
+<tr><td class="sch-num">7</td><td class="sch-date">28-Sep</td><td class="sch-day">Mon</td><td class="sch-topic"><a href="#class-7">Natural and Anthropogenic Climate Change</a></td></tr>
+<tr><td class="sch-num">8</td><td class="sch-date">30-Sep</td><td class="sch-day">Wed</td><td class="sch-topic"><a href="#class-8">Climate Change Modeling and Attribution</a></td></tr>
+<tr><td class="sch-num">9</td><td class="sch-date">5-Oct</td><td class="sch-day">Mon</td><td class="sch-topic"><a href="#class-9">Climate Change Scenarios and Data</a></td></tr>
+<tr><td class="sch-num">10</td><td class="sch-date">7-Oct</td><td class="sch-day">Wed</td><td class="sch-topic"><a href="#class-10">Global Carbon Budget</a></td></tr>
+<tr><td class="sch-num">11</td><td class="sch-date">12-Oct</td><td class="sch-day">Mon</td><td class="sch-topic"><a href="#class-11">Valuing intangibles, the Social Cost of Carbon, Carbon Taxes, and Emissions Trading Schemes</a></td></tr>
+<tr><td class="sch-num">12</td><td class="sch-date">14-Oct</td><td class="sch-day">Wed</td><td class="sch-topic"><a href="#class-12">Public perceptions of Climate Change</a></td></tr>
+<tr class="holiday-row"><td class="sch-num">—</td><td class="sch-date">19-Oct</td><td class="sch-day">Mon</td><td class="sch-topic">Fall Study Break (no class)</td></tr>
+<tr><td class="sch-num">13</td><td class="sch-date">21-Oct</td><td class="sch-day">Wed</td><td class="sch-topic"><a href="#class-13">Climate Change Impacts on Health</a></td></tr>
+<tr><td class="sch-num">14</td><td class="sch-date">26-Oct</td><td class="sch-day">Mon</td><td class="sch-topic"><a href="#class-14">Climate Change Impacts on Ecosystems</a></td></tr>
+<tr><td class="sch-num">15</td><td class="sch-date">28-Oct</td><td class="sch-day">Wed</td><td class="sch-topic"><a href="#class-15">Mid-term</a></td></tr>
+<tr><td class="sch-num">16</td><td class="sch-date">2-Nov</td><td class="sch-day">Mon</td><td class="sch-topic"><a href="#class-16">Climate Change Impacts on Cities and Infrastructure</a></td></tr>
+<tr><td class="sch-num">17</td><td class="sch-date">4-Nov</td><td class="sch-day">Wed</td><td class="sch-topic"><a href="#class-17">Climate Change Impacts on Agriculture</a></td></tr>
+<tr><td class="sch-num">18</td><td class="sch-date">9-Nov</td><td class="sch-day">Mon</td><td class="sch-topic"><a href="#class-18">Climate change solutions: Electricity, Renewables, and Nuclear</a></td></tr>
+<tr><td class="sch-num">19</td><td class="sch-date">11-Nov</td><td class="sch-day">Wed</td><td class="sch-topic"><a href="#class-19">Climate change solutions: Transportation</a></td></tr>
+<tr><td class="sch-num">20</td><td class="sch-date">16-Nov</td><td class="sch-day">Mon</td><td class="sch-topic"><a href="#class-20">Climate change solutions: Industry</a></td></tr>
+<tr><td class="sch-num">21</td><td class="sch-date">18-Nov</td><td class="sch-day">Wed</td><td class="sch-topic"><a href="#class-21">Climate change solutions: Built environment</a></td></tr>
+<tr><td class="sch-num">22</td><td class="sch-date">23-Nov</td><td class="sch-day">Mon</td><td class="sch-topic"><a href="#class-22">Climate change solutions: Geoengineering and CCS</a></td></tr>
+<tr class="holiday-row"><td class="sch-num">—</td><td class="sch-date">25-Nov</td><td class="sch-day">Wed</td><td class="sch-topic">Thanksgiving Break (no class)</td></tr>
+<tr><td class="sch-num">23</td><td class="sch-date">30-Nov</td><td class="sch-day">Mon</td><td class="sch-topic"><a href="#class-23">Climate change solutions: Justice</a></td></tr>
+<tr><td class="sch-num">24</td><td class="sch-date">2-Dec</td><td class="sch-day">Wed</td><td class="sch-topic"><a href="#class-24">Class presentations</a></td></tr>
+<tr><td class="sch-num">25</td><td class="sch-date">7-Dec</td><td class="sch-day">Mon</td><td class="sch-topic"><a href="#class-24">Class presentations</a></td></tr>
+<tr><td class="sch-num">26</td><td class="sch-date">9-Dec</td><td class="sch-day">Wed</td><td class="sch-topic"><a href="#class-24">Class presentations</a></td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="section" id="outline">
+<h2 class="section-heading">Class-by-Class Outline</h2>
+<div class="class-card" id="class-1">
+  <div class="class-head">
+    <span class="class-badge">Class 1</span>
+    <span class="class-date">Sep 2</span>
+  </div>
+  <h3 class="class-topic">Evidence for Climate Change</h3>
+  <ul class="reading-list">
+    <li>Read Ch1 and Ch2 of <em>Introduction to Modern Climate Change</em>.</li>
+<li>Ward, Ashley. 2025. “Opinion | Extreme Heat Is Breaking America.” <span class="pub-journal">The New York Times</span>, June 25. <a href="https://www.nytimes.com/2025/06/25/opinion/heat-wave-climate.html" target="_blank" rel="noopener">link</a></li>
+  </ul>
+</div>
+<div class="class-card" id="class-2">
+  <div class="class-head">
+    <span class="class-badge">Class 2</span>
+    <span class="class-date">Sep 9</span>
+  </div>
+  <h3 class="class-topic">Earth’s Energy Balance</h3>
+  <ul class="reading-list">
+    <li>Read Ch3 and Ch4 of Dessler.</li>
+<li>Lecture slides: <a href="https://umich.instructure.com/courses/772729/files/42036347?wrap=1" target="_blank" rel="noopener">here</a> · <a href="https://umich.instructure.com/courses/772729/files/42036347/download?download_frd=1" target="_blank" rel="noopener">download</a></li>
+<li>Niiler, Eric. 2025. “Is CO&#8322; Truly a Pollutant? We Break Down the Debate.” <span class="pub-journal">WSJ</span>, August 18. <a href="https://www.wsj.com/science/environment/tcarbon-dioxide-pollutant-7fb98d22" target="_blank" rel="noopener">link</a></li>
+  </ul>
+</div>
+<div class="class-card" id="class-3">
+  <div class="class-head">
+    <span class="class-badge">Class 3</span>
+    <span class="class-date">Sep 14</span>
+  </div>
+  <h3 class="class-topic">Atmospheric Circulation</h3>
+  <ul class="reading-list">
+    <li>Watch these videos, in order: <a href="https://www.youtube.com/watch?v=7fd03fBRsuU" target="_blank" rel="noopener">1</a> · <a href="https://www.youtube.com/watch?v=xqM83_og1Fc" target="_blank" rel="noopener">2</a> · <a href="https://www.youtube.com/watch?v=PDEcAxfSYaI" target="_blank" rel="noopener">3</a></li>
+<li>News story: read <a href="https://umich.instructure.com/courses/772729/files/41731994?wrap=1" target="_blank" rel="noopener">this article on the Polar Vortex</a> as well as <a href="https://climate.mit.edu/explainers/polar-jet-stream-and-polar-vortex" target="_blank" rel="noopener">this explainer</a>.</li>
+  </ul>
+</div>
+<div class="class-card" id="class-4">
+  <div class="class-head">
+    <span class="class-badge">Class 4</span>
+    <span class="class-date">Sep 16</span>
+  </div>
+  <h3 class="class-topic">Ocean Circulation</h3>
+  <ul class="reading-list">
+    <li>Watch <a href="https://www.youtube.com/watch?v=p4pWafuvdrY" target="_blank" rel="noopener">this video</a> and read <a href="https://scied.ucar.edu/video/ocean-move-thermohaline-circulation" target="_blank" rel="noopener">this explainer on thermohaline circulation</a>.</li>
+<li>Watch <a href="https://www.youtube.com/watch?v=WPA-KpldDVc" target="_blank" rel="noopener">this video</a> and read <a href="https://oceanservice.noaa.gov/facts/ninonina.html" target="_blank" rel="noopener">this on El Ni&#241;o / La Ni&#241;a</a>.</li>
+<li>Read this <a href="https://umich.instructure.com/courses/478572/files/21438497?wrap=1" target="_blank" rel="noopener">article</a>.</li>
+  </ul>
+</div>
+<div class="class-card" id="class-5">
+  <div class="class-head">
+    <span class="class-badge">Class 5</span>
+    <span class="class-date">Sep 21</span>
+  </div>
+  <h3 class="class-topic">The Carbon Cycle</h3>
+  <ul class="reading-list">
+    <li>Read Ch5 of Dessler.</li>
+<li>Temple, J. 2020. “How green sand could capture billions of tons of carbon dioxide.” <span class="pub-journal">MIT Technology Review</span>. <a href="https://www.technologyreview.com/2020/06/22/1004218/how-green-sand-could-capture-billions-of-tons-of-carbon-dioxide/" target="_blank" rel="noopener">link</a></li>
+  </ul>
+</div>
+<div class="class-card" id="class-6">
+  <div class="class-head">
+    <span class="class-badge">Class 6</span>
+    <span class="class-date">Sep 23</span>
+  </div>
+  <h3 class="class-topic">Sensitivity and Feedbacks</h3>
+  <ul class="reading-list">
+    <li>Read Ch6 of Dessler.</li>
+<li>Ochoa, F. N. &amp; Lee, A. “Climate Change Can Take Big Toll on Asian Economies, Inaction Could Cost More, ADB Report Says.” <span class="pub-journal">Wall Street Journal</span> (2024).</li>
+  </ul>
+</div>
+<div class="class-card" id="class-7">
+  <div class="class-head">
+    <span class="class-badge">Class 7</span>
+    <span class="class-date">Sep 28</span>
+  </div>
+  <h3 class="class-topic">Natural and Anthropogenic Climate Change</h3>
+  <ul class="reading-list">
+    <li>Read Chapter 7 of Dessler.</li>
+<li><em>Skim</em> Chapter 9 of <em>Global Physical Climatology</em>.</li>
+<li>Read this story on “Snowball Earth”. <a href="https://www.popularmechanics.com/science/environment/a61897263/scientists-found-proof-snowball-earth/" target="_blank" rel="noopener">link</a></li>
+  </ul>
+</div>
+<div class="class-card" id="class-8">
+  <div class="class-head">
+    <span class="class-badge">Class 8</span>
+    <span class="class-date">Sep 30</span>
+  </div>
+  <h3 class="class-topic">Climate Change Modeling and Attribution</h3>
+  <ul class="reading-list">
+    <li>Read Chapter 8 of Dessler.</li>
+<li>Read G.P. Wayne’s <a href="https://umich.instructure.com/courses/478572/files/21654579?wrap=1" target="_blank" rel="noopener">Guide to Shared Socioeconomic Pathways</a>.</li>
+<li>Read Zeke Hausfather’s <a href="https://www.carbonbrief.org/explainer-how-shared-socioeconomic-pathways-explore-future-climate-change" target="_blank" rel="noopener">explainer</a> for Shared Socioeconomic Pathways.</li>
+<li>Read: <a href="https://www.scientificamerican.com/article/the-worst-climate-scenarios-may-no-longer-be-the-most-likely/?print=true" target="_blank" rel="noopener">The Worst Climate Scenarios May No Longer Be the Most Likely</a>.</li>
+  </ul>
+</div>
+<div class="class-card" id="class-9">
+  <div class="class-head">
+    <span class="class-badge">Class 9</span>
+    <span class="class-date">Oct 5</span>
+  </div>
+  <h3 class="class-topic">Climate Change Scenarios and Data</h3>
+  <ul class="reading-list">
+    <li>Read Chapter 11 of <em>Global Physical Climatology</em> (<a href="https://umich.instructure.com/courses/772729/files/41731981?wrap=1" target="_blank" rel="noopener">here</a>).</li>
+<li>Read Pages 1&#8211;14 of NAS, “Attribution of Extreme Weather Events in the Context of Climate Change,” 2016. <a href="http://www.nap.edu/21852" target="_blank" rel="noopener">link</a></li>
+<li>We will discuss these resources, which may be useful for projects: <a href="https://journals.ametsoc.org/collection/EEE?access=all&amp;pageSize=10&amp;sort=datedescending" target="_blank" rel="noopener">AMS Explaining Extreme Events collection</a> · <a href="https://www.worldweatherattribution.org/analysis/heatwave/" target="_blank" rel="noopener">World Weather Attribution</a>.</li>
+<li>Time permitting, we will explore <a href="https://umich.instructure.com/courses/772729/files/42455654?wrap=1" target="_blank" rel="noopener">this dataset</a>.</li>
+<li>Read this story: <a href="https://www.wsj.com/science/environment/flash-floods-extreme-rain-attribution-science-99dfd2be?mod=Searchresults&amp;pos=1&amp;page=1" target="_blank" rel="noopener">Flash floods, extreme rain, and attribution science</a>.</li>
+  </ul>
+</div>
+<div class="class-card" id="class-10">
+  <div class="class-head">
+    <span class="class-badge">Class 10</span>
+    <span class="class-date">Oct 7</span>
+  </div>
+  <h3 class="class-topic">Global Carbon Budget</h3>
+  <ul class="reading-list">
+    <li>Read Ch10 of Dessler.</li>
+<li>Watch the three videos on <a href="https://globalcarbonbudget.org/" target="_blank" rel="noopener">this website</a> and flip through <a href="https://umich.instructure.com/courses/772729/files/42560077?wrap=1" target="_blank" rel="noopener">these slides</a>.</li>
+<li>Also read <a href="https://umich.instructure.com/courses/772729/files/42560211?wrap=1" target="_blank" rel="noopener">this</a>.</li>
+<li>Listen to this podcast: <a href="https://www.nytimes.com/2022/09/20/opinion/ezra-klein-podcast-jesse-jenkins.html" target="_blank" rel="noopener">Ezra Klein with Jesse Jenkins</a>.</li>
+  </ul>
+</div>
+<div class="class-card" id="class-11">
+  <div class="class-head">
+    <span class="class-badge">Class 11</span>
+    <span class="class-date">Oct 12</span>
+  </div>
+  <h3 class="class-topic">Valuing intangibles, the Social Cost of Carbon, Carbon Taxes, and Emissions Trading Schemes</h3>
+  <ul class="reading-list">
+    <li>Skim: Pearce, R. “Q&amp;A: The social cost of carbon.” <span class="pub-journal">Carbon Brief</span> (2017). <a href="https://www.carbonbrief.org/qa-social-cost-carbon/" target="_blank" rel="noopener">link</a></li>
+<li>World Bank. <em>State and Trends of Carbon Pricing 2025</em> (2025). (<a href="https://umich.instructure.com/courses/772729/files/42679838?wrap=1" target="_blank" rel="noopener">here</a>)</li>
+<li>Sections 5.1&#8211;5.7 of Morgan, M. Granger, <em>Theory and Practice of Policy Analysis</em> (<a href="https://umich.instructure.com/courses/772729/files/41731882?wrap=1" target="_blank" rel="noopener">here</a>).</li>
+  </ul>
+</div>
+<div class="class-card" id="class-12">
+  <div class="class-head">
+    <span class="class-badge">Class 12</span>
+    <span class="class-date">Oct 14</span>
+  </div>
+  <h3 class="class-topic">Public Perception</h3>
+  <ul class="reading-list">
+    <li>Watch the film <em>Merchants of Doubt</em>: (1) go to lib.umich.edu, (2) search for “Merchants of Doubt,” (3) click the online version of the movie.</li>
+  </ul>
+</div>
+<div class="class-card" id="class-13">
+  <div class="class-head">
+    <span class="class-badge">Class 13</span>
+    <span class="class-date">Oct 21</span>
+  </div>
+  <h3 class="class-topic">Climate Change Impacts on Health</h3>
+  <ul class="reading-list">
+    <li>Carlson, C. J. <em>et al.</em> “Health losses attributed to anthropogenic climate change.” <span class="pub-journal">Nat. Clim. Chang.</span> 15, 1052&#8211;1055 (2025). (<a href="https://umich.instructure.com/courses/772729/files/42721219?wrap=1" target="_blank" rel="noopener">here</a>)</li>
+<li>Chapter 5 of the <em>Fifth National Climate Assessment</em> (NCA5). (<a href="https://umich.instructure.com/courses/772729/files/42721483?wrap=1" target="_blank" rel="noopener">here</a>)</li>
+  </ul>
+</div>
+<div class="class-card" id="class-14">
+  <div class="class-head">
+    <span class="class-badge">Class 14</span>
+    <span class="class-date">Oct 26</span>
+  </div>
+  <h3 class="class-topic">Climate Change Impacts on Ecosystems</h3>
+  <ul class="reading-list">
+    <li>Harris, R. M. B. <em>et al.</em> “Biological responses to the press and pulse of climate trends and extreme events.” <span class="pub-journal">Nature Climate Change</span> 8, 579&#8211;587 (2018). (<a href="https://umich.instructure.com/courses/772729/files/42793295?wrap=1" target="_blank" rel="noopener">here</a>)</li>
+<li>McElwee, P.D. <em>et al.</em> 2023: Ch. 8, Ecosystems, ecosystem services, and biodiversity. In <em>Fifth National Climate Assessment</em>. <a href="https://doi.org/10.7930/NCA5.2023.CH8" target="_blank" rel="noopener">link</a></li>
+<li>Listen to this <a href="https://www.dropbox.com/scl/fi/hoahi1g3gtxnh3f1nu3jl/Ecosystems_Under_Siege__Fire-_Water_Stress-_and_the_Governance_.m4a?rlkey=bwfl4hpafhcdxb9bd7xyik0tp&amp;st=6yclv1bn&amp;dl=0" target="_blank" rel="noopener">AI-generated podcast</a> summarizing IPCC AR6 WG II Chapters <a href="https://umich.instructure.com/courses/772729/files/42793205?wrap=1" target="_blank" rel="noopener">2</a>, <a href="https://umich.instructure.com/courses/772729/files/42793213?wrap=1" target="_blank" rel="noopener">3</a>, <a href="https://umich.instructure.com/courses/772729/files/42793224?wrap=1" target="_blank" rel="noopener">4</a>, <a href="https://umich.instructure.com/courses/772729/files/42793237?wrap=1" target="_blank" rel="noopener">5</a>. You may also read the executive summaries.</li>
+  </ul>
+</div>
+<div class="class-card" id="class-15">
+  <div class="class-head">
+    <span class="class-badge">Class 15</span>
+    <span class="class-date">Oct 28</span>
+  </div>
+  <h3 class="class-topic">Mid-term</h3>
+  <ul class="reading-list">
+    <li>In-class mid-term covering the climate science component of the course (20% of the grade). On paper and timed; written or printed notes permitted, computers closed. Calculators allowed.</li>
+  </ul>
+</div>
+<div class="class-card" id="class-16">
+  <div class="class-head">
+    <span class="class-badge">Class 16</span>
+    <span class="class-date">Nov 2</span>
+  </div>
+  <h3 class="class-topic">Climate Change Impacts on Cities and Infrastructure</h3>
+  <ul class="reading-list">
+    <li>Chu, E.K. <em>et al.</em> 2023: Ch. 12, Built environment, urban systems, and cities. In <em>Fifth National Climate Assessment</em>. <a href="https://doi.org/10.7930/NCA5.2023.CH12" target="_blank" rel="noopener">link</a></li>
+<li>Listen to <a href="https://www.dropbox.com/scl/fi/82wavsovy9bwv2z1mc51p/Ch6.m4a?rlkey=dn29iy07zttxqg9frawczjtiy&amp;st=a36rohgb&amp;dl=0" target="_blank" rel="noopener">this AI-generated podcast</a> based on IPCC AR6 WG II Chapter 6. You may also read the report or its <a href="https://umich.instructure.com/courses/772729/files/42794889?wrap=1" target="_blank" rel="noopener">executive summary</a>.</li>
+  </ul>
+</div>
+<div class="class-card" id="class-17">
+  <div class="class-head">
+    <span class="class-badge">Class 17</span>
+    <span class="class-date">Nov 4</span>
+  </div>
+  <h3 class="class-topic">Climate Change Impacts on Agriculture</h3>
+  <ul class="reading-list">
+    <li>Bolster, C.H. <em>et al.</em> 2023: Ch. 11, Agriculture, food systems, and rural communities. In <em>Fifth National Climate Assessment</em>. <a href="https://doi.org/10.7930/NCA5.2023.CH11" target="_blank" rel="noopener">link</a></li>
+<li>Clark, M. A. <em>et al.</em> “Global food system emissions could preclude achieving the 1.5&#176; and 2&#176;C climate change targets.” <span class="pub-journal">Science</span> 370, 705&#8211;708 (2020). (<a href="https://umich.instructure.com/courses/772729/files/41732032?wrap=1" target="_blank" rel="noopener">here</a>)</li>
+<li>Challinor, A. J. <em>et al.</em> “A meta-analysis of crop yield under climate change and adaptation.” <span class="pub-journal">Nature Clim. Change</span> 4, 287&#8211;291 (2014). (<a href="https://umich.instructure.com/courses/772729/files/41731906?wrap=1" target="_blank" rel="noopener">here</a>)</li>
+  </ul>
+</div>
+<div class="class-card" id="class-18">
+  <div class="class-head">
+    <span class="class-badge">Class 18</span>
+    <span class="class-date">Nov 9</span>
+  </div>
+  <h3 class="class-topic">Climate Change Solutions: Electricity, Renewables, and Nuclear</h3>
+  <ul class="reading-list">
+    <li>Larson, C. <em>et al.</em> <em>Net-Zero America: Potential Pathways, Infrastructure, and Impacts</em>, interim report, Princeton University, December 15, 2020. (<a href="https://www.dropbox.com/scl/fi/ol7ivcso5t2k3wux2r5bk/Princeton-NZA-FINAL-REPORT-29Oct2021.pdf?rlkey=zmhc0gryurzlyfo0faac036v6&amp;e=1&amp;dl=0" target="_blank" rel="noopener">here</a>) — Pages 7&#8211;24, and Pages 88&#8211;171 (don’t panic: these are slides, not dense text).</li>
+<li>Grubert, E. “Fossil electricity retirement deadlines for a just transition.” <span class="pub-journal">Science</span> 370, 1171&#8211;1173 (2020). (<a href="https://umich.instructure.com/courses/772729/files/42799001?wrap=1" target="_blank" rel="noopener">here</a>)</li>
+<li>Craig, M. T. <em>et al.</em> “A review of the potential impacts of climate change on bulk power system planning and operations in the United States.” <span class="pub-journal">Renewable and Sustainable Energy Reviews</span> 98, 255&#8211;267 (2018). (<a href="https://umich.instructure.com/courses/772729/files/42799166?wrap=1" target="_blank" rel="noopener">here</a>)</li>
+  </ul>
+</div>
+<div class="class-card" id="class-19">
+  <div class="class-head">
+    <span class="class-badge">Class 19</span>
+    <span class="class-date">Nov 11</span>
+  </div>
+  <h3 class="class-topic">Climate Change Solutions: Transportation</h3>
+  <ul class="reading-list">
+    <li>MacKay, D. J. C. <em>Sustainable Energy – Without Hot Air</em>, Chapter 20, Better Transport. <a href="http://www.withouthotair.com/c20/page_118.shtml" target="_blank" rel="noopener">link</a></li>
+<li>MacKay, D. J. C. <em>Sustainable Energy – Without Hot Air</em>, Chapter A, Cars II. <a href="http://www.withouthotair.com/cA/page_254.shtml" target="_blank" rel="noopener">link</a></li>
+<li>Viswanathan, V. <em>et al.</em> “The Challenges and Opportunities of Battery-Powered Flight.” <span class="pub-journal">Nature</span> 601, 519&#8211;25 (2022). <a href="https://doi.org/10.1038/s41586-021-04139-1" target="_blank" rel="noopener">doi</a> (<a href="https://umich.instructure.com/courses/772729/files/41732037?wrap=1" target="_blank" rel="noopener">here</a>)</li>
+<li>Wallington, T. J. <em>et al.</em> “Green hydrogen pathways, energy efficiencies, and intensities for ground, air, and marine transportation.” <span class="pub-journal">Joule</span> 8, 2190&#8211;2207 (2024). (<a href="https://umich.instructure.com/courses/772729/files/42799297?wrap=1" target="_blank" rel="noopener">here</a>)</li>
+<li>Smith, E. <em>et al.</em> “Greenhouse Gas Reductions Driven by Vehicle Electrification across Powertrains, Classes, Locations, and Use Patterns.” <span class="pub-journal">Environ. Sci. Technol.</span> 59, 19768&#8211;19780 (2025). (<a href="https://umich.instructure.com/courses/772729/files/42799557?wrap=1" target="_blank" rel="noopener">here</a>)</li>
+  </ul>
+</div>
+<div class="class-card" id="class-20">
+  <div class="class-head">
+    <span class="class-badge">Class 20</span>
+    <span class="class-date">Nov 16</span>
+  </div>
+  <h3 class="class-topic">Climate Change Solutions: Industry</h3>
+  <ul class="reading-list">
+    <li>Gailani, A. <em>et al.</em> “Assessing the potential of decarbonization options for industrial sectors.” <span class="pub-journal">Joule</span> 8, 576&#8211;603 (2024). (<a href="https://umich.instructure.com/courses/772729/files/42859056?wrap=1" target="_blank" rel="noopener">here</a>)</li>
+  </ul>
+</div>
+<div class="class-card" id="class-21">
+  <div class="class-head">
+    <span class="class-badge">Class 21</span>
+    <span class="class-date">Nov 18</span>
+  </div>
+  <h3 class="class-topic">Climate Change Solutions: Buildings</h3>
+  <ul class="reading-list">
+    <li>Readings to be announced.</li>
+  </ul>
+</div>
+<div class="class-card" id="class-22">
+  <div class="class-head">
+    <span class="class-badge">Class 22</span>
+    <span class="class-date">Nov 23</span>
+  </div>
+  <h3 class="class-topic">Climate Change Solutions: Geoengineering and CCS</h3>
+  <ul class="reading-list">
+    <li>Chapter 2 of National Research Council 2015. <em>Climate Intervention: Carbon Dioxide Removal and Reliable Sequestration.</em> Washington, DC: The National Academies Press. <a href="https://doi.org/10.17226/18805" target="_blank" rel="noopener">doi</a></li>
+<li>Chapter 2 of National Research Council 2015. <em>Climate Intervention: Reflecting Sunlight to Cool Earth.</em> Washington, DC: The National Academies Press. <a href="https://doi.org/10.17226/18988" target="_blank" rel="noopener">doi</a></li>
+  </ul>
+</div>
+<div class="class-card" id="class-23">
+  <div class="class-head">
+    <span class="class-badge">Class 23</span>
+    <span class="class-date">Nov 30</span>
+  </div>
+  <h3 class="class-topic">Climate Change and Environmental Justice</h3>
+  <ul class="reading-list">
+    <li>Carley, Sanya, and David M. Konisky. “The Justice and Equity Implications of the Clean Energy Transition.” <span class="pub-journal">Nature Energy</span> 5, 569&#8211;77 (2020). <a href="https://doi.org/10.1038/s41560-020-0641-6" target="_blank" rel="noopener">doi</a></li>
+  </ul>
+</div>
+<div class="class-card" id="class-24">
+  <div class="class-head">
+    <span class="class-badge">Class 24–26</span>
+    <span class="class-date">Dec 2, 7 &amp; 9</span>
+  </div>
+  <h3 class="class-topic">Class Presentations</h3>
+  <ul class="reading-list">
+    <li>Student team presentations across the final three sessions.</li>
+  </ul>
+</div>
+</section>
+
+<section class="section" id="policies">
+<h2 class="section-heading">Policies &amp; Resources</h2>
+<p><strong>Academic misconduct.</strong> Plagiarism or cheating on any exam or assignment is forbidden and will result in a failing grade on the exam or assignment and possibly in the course. All cases will be referred to the Office of the Assistant Dean for Undergraduate Education. You are responsible for knowing what constitutes academic misconduct (see <a href="http://www.lsa.umich.edu/academicintegrity/examples.html" target="_blank" rel="noopener">the LSA academic integrity examples</a>); I am glad to answer questions.</p>
+<p><strong>Mental health.</strong> Please look after yourself. The University provides confidential resources to all enrolled students, including Counseling and Psychological Services (CAPS, 734-764-8312), the Sexual Assault Prevention and Awareness Center (SAPAC 24-hour crisis line, 734-936-3333), Psychiatric Emergency Services (734-996-4747), the Spectrum Center (734-763-4186), and Services for Students with Disabilities (734-763-3000). The SEAS Embedded CAPS Counselor is Dr. Chunyue Tu (<a href="mailto:chunyue@med.umich.edu">chunyue@med.umich.edu</a>). Please also reach out to me (<a href="mailto:parthtv@umich.edu">parthtv@umich.edu</a>) if you are feeling overwhelmed.</p>
+<p><strong>Sexual misconduct.</strong> Title IX prohibits discrimination on the basis of sex, including sexual misconduct in the forms of harassment, domestic and dating violence, sexual assault, and stalking. Confidential support and academic advocacy are available through SAPAC on their 24-hour crisis line, (734) 936-3333, and at sapac.umich.edu. Alleged violations can be non-confidentially reported to the Office for Institutional Equity (OIE) at institutional.equity@umich.edu.</p>
+<p><strong>Religious observances and special circumstances.</strong> I realize students may have religious obligations during the term. If you are aware of a conflict with a course expectation and your observance of a religious holiday, please contact me as soon as possible and I will do my best to make the necessary accommodations. See the <a href="https://lsa.umich.edu/lsa/academics/dates-and-deadlines/religious-holidays" target="_blank" rel="noopener">University policies on holiday observances</a>.</p>
+</section>
+
+</main>
+<script>
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('#sidebar nav a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + entry.target.id) link.classList.add('active');
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => observer.observe(s));
+  navLinks.forEach(link => link.addEventListener('click', () => {
+    document.getElementById('sidebar').classList.remove('open');
+  }));
+</script>
+</body>
+</html>
